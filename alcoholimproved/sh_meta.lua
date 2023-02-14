@@ -10,7 +10,7 @@ end
 function playerMeta:AddDrunkEffect(amount, duration)
     local character = self:GetCharacter()
 
-    character:SetDrunkEffect(character:GetDrunkEffectTime() + amount)
+    character:SetDrunkEffect(character:GetDrunkEffect() + amount)
     character:SetDrunkEffectTime(CurTime() + (character:GetDrunkEffectTime() + duration))
 
     if ix.config.Get("enableAlcoholFallover") and character:GetDrunkEffect() >= ix.config.Get("alcoholFallover") then
