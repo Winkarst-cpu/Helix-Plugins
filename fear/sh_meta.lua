@@ -1,14 +1,17 @@
 local PLUGIN = PLUGIN
 local meta = FindMetaTable("Player")
+local CHAR = ix.meta.character
 
-function meta:CanHaveFear()
-    local faction = ix.faction.indices[self:Team()]
+function CHAR:CanHaveFear()
+    local faction = ix.faction.indices[self:GetFaction()]
 
     return !(self.CanFear or faction.CanFear)
 end
 
 function meta:IsFearing()
-    if !self:GetCharacter() or !self:CanHaveFear() then return false end
+    local character = self:GetCharacter()
+
+    if !character or !character:CanHaveFear() then return false end
 
     for _, player in pairs(player.GetAll()) do
         if player == self then continue end
