@@ -5,7 +5,7 @@ local CHAR = ix.meta.character
 function CHAR:CanHaveFear()
     local faction = ix.faction.indices[self:GetFaction()]
 
-    return self.CanFear or faction.CanFear
+    return self.CanFear or faction.CanFear or true
 end
 
 function meta:IsFearing()
