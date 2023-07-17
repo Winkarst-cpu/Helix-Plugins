@@ -2,10 +2,12 @@ local PLUGIN = PLUGIN
 local meta = FindMetaTable("Player")
 
 function meta:CanHaveFear()
-    local faction = ix.faction.indices[self:GetCharacter():GetFaction()]
-    local class = ix.class.list[self:GetCharacter():GetClass()]
+    local character = self:GetCharacter()
 
-    return self:GetCharater().CanFear or class.CanFear or faction.CanFear or hook.Run("PlayerFear", self, self:GetCharacter()) or true
+    local faction = ix.faction.indices[character:GetFaction()]
+    local class = ix.class.list[character:GetClass()]
+
+    return self.CanFear or (istable(class) and class.CanFear) or faction.CanFear or hook.Run("PlayerFear", self, character) or true
 end
 
 function meta:IsFearing()
@@ -39,7 +41,7 @@ function CHAR:CanHaveFear()
     local faction = ix.faction.indices[self:GetFaction()]
     local class = ix.class.list[self:GetClass()]
 
-    return self.CanFear or class.CanFear or faction.CanFear or hook.Run("PlayerFear", self, self:GetCharacter()) or true
+    return self.CanFear or (istable(class) and class.CanFear) or faction.CanFear or hook.Run("PlayerFear", self, self:GetCharacter()) or true
 end
 
 function CHAR:IsFearing()
