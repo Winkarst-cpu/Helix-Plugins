@@ -5,7 +5,7 @@ function meta:CanHaveFear()
     local faction = ix.faction.indices[self:GetCharacter():GetFaction()]
     local class = ix.class.list[self:GetCharacter():GetClass()]
 
-    return self.CanFear or class.CanFear or faction.CanFear or hook.Run("PlayerFear", self, self:GetCharacter()) or true
+    return self:GetCharater().CanFear or class.CanFear or faction.CanFear or hook.Run("PlayerFear", self, self:GetCharacter()) or true
 end
 
 function meta:IsFearing()
