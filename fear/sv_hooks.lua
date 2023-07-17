@@ -1,12 +1,12 @@
 local PLUGIN = PLUGIN
 
 function PLUGIN:PlayerTick(ply)
-    if ply:IsFearing() and !ply.fearingSounds then
-        ply.fearingSounds = true
+    if ply:IsFearing() and !ply.fearSounds then
+        ply.fearSounds = true
 
         ply:EmitSound("player/heartbeat1.wav", 60)
-    elseif !ply:IsFearing() and ply.fearingSounds then
-        ply.fearingSounds = false
+    elseif !ply:IsFearing() and ply.fearSounds then
+        ply.fearSounds = false
 
         if (ply:IsValid()) then
             ply:StopSound("player/heartbeat1.wav")

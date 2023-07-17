@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "Fear"
-PLUGIN.author = "Winkarst#6698"
+PLUGIN.author = "winkarst"
 PLUGIN.license = [[
     MIT License
     Copyright (c) 2023 Winkarst
