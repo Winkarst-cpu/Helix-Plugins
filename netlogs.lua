@@ -4,14 +4,12 @@ PLUGIN.name = "Net Logs"
 PLUGIN.author = "winkarst"
 
 if (SERVER) then
-    net.OldIncoming = net.OldIncoming or net.Incoming
-
     ix.log.AddType("net", function(client, messageName)
         return string.format("[Net Log] Player %s (%s) sent net message %s.", client:GetName(), client:SteamID(), messageName)
     end)
 
     ix.log.AddType("invalidNet", function(client)
-        return string.format("[Net Log] Player %s (%s) tried to sent invalid net message!", client:GetName(), client:SteamID())
+        return string.format("[Net Log] Player %s (%s) tried to send invalid net message!", client:GetName(), client:SteamID())
     end)
 
     function net.Incoming(length, client)
@@ -25,7 +23,6 @@ if (SERVER) then
         end
 
         local func = net.Receivers[strName:lower()]
-
         if (!func) then
             ix.log.Add(client, "invalidNet")
 
@@ -34,6 +31,8 @@ if (SERVER) then
 
         ix.log.Add(client, "net", strName)
 
-        net.OldIncoming(length, client)
+        length = length - 16
+
+        func(length, client)
     end
 end
